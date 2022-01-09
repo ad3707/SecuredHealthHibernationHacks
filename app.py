@@ -8,26 +8,25 @@ engine = create_engine(DATABASEURI)
 
 @app.before_request
 def before_request():
-  try:
-    g.conn = engine.connect()
-  except:
-    print("Cannot connect to database")
-    import traceback; traceback.print_exc()
-    g.conn = None
+    try:
+        g.conn = engine.connect()
+    except:
+        print("Cannot connect to database")
+        import traceback; traceback.print_exc()
+        g.conn = None
 
 @app.teardown_request
 def teardown_request(exception):
-  
-  try:
-    g.conn.close()
-  except Exception as e:
-    pass
+    try:
+        g.conn.close()
+    except Exception as e:
+        pass
     
 
 #static route
 @app.route("/")
 def home():
-	return render_template("index.html")
+    return render_template("index.html")
  
 @app.route("/home")
 def homeBack():
@@ -35,27 +34,27 @@ def homeBack():
 
 @app.route('/schedule', methods = ["GET", "POST"])
 def schedule():
-        username = request.args.get('user')
-        if request.method == "POST":
-            speciality = request.form['speciality']
-            return redirect(url_for('availabledoctors',user = username,speciality = speciality))
-        return render_template("schedule.html")
+    username = request.args.get('user')
+    if request.method == "POST":
+        speciality = request.form['speciality']
+        return redirect(url_for('availabledoctors',user = username,speciality = speciality))
+    return render_template("schedule.html")
 
 @app.route("/confirmschedule")
 def confirmschedule():
-        return render_template("confirmschedule.html")
+    return render_template("confirmschedule.html")
 
 @app.route("/confirmation")
 def confirmation():
-        return render_template("confirmation.html")
+    return render_template("confirmation.html")
         
 @app.route("/dashboard")
 def confirmation():
-        return render_template("dashboard.html")
+    return render_template("dashboard.html")
 
 @app.route("/availabledoctors")
 def availabledoctors():
-        return render_template("availabledoctors.html")
+    return render_template("availabledoctors.html")
 
 @app.route("/createaccount",methods = ["GET", "POST"])
 def gfg():
@@ -80,7 +79,7 @@ def gfg():
 		height = request.form.get("height")
 		zip = request.form.get("zipcode")
 		state = request.form.get("state")
-  
+        
         try:
             g.conn.execute('INSERT INTO Users(name, breed, birthday, sex, profile_picture, bio, username, size, build) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)', name, breed, birthday, sex, profile_picture, bio, username, size, build)
             
