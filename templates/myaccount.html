@@ -3,14 +3,11 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
 
-body, div, form, input, select, p {
-padding: 0;
-margin: 0;
-outline: none;
+body, div, form, input{
 font-family: Roboto, Arial, sans-serif;
 font-size: 14px;
 color: 	#000000;
-line-height: 22px;
+border-radius: 20px;
 }
 
 input[type=text], input[type=password] {
@@ -30,6 +27,7 @@ button {
   border: none;
   cursor: pointer;
   width: 20%;
+  border-radius: 20px;
 }
 
 
@@ -48,20 +46,20 @@ button {
       </div>
 
 
-    <h1> <center> My Secure Health Account </center> </h1>
+    <h1> <center> My Secured Health Account </center> </h1>
     <h4> <center> Login to view your account info </center> </h4>
 
     <form action="{{ url_for("myaccount")}}" method="post">
 
-    <input type="text" name="username" placeholder="username" required/>
-    <input type="text" name="password" placeholder="password" required/>
+    <input type="text" name="username" placeholder="Username" required/>
+    <input type="password" name="password" placeholder="Password" required/>
 
-    <div class="btn-block">
-  <button type="submit">Login</button>
-    </div>
     <label>
-     <input type="checkbox" checked="checked" name="remember"> Remember me
-   </label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+    <div class="btn-block">
+  <center><button type="submit">Login</button></center>
+    </div>
 
 
   </form>
