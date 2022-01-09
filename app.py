@@ -37,16 +37,15 @@ def home():
 def homeBack():
     return render_template("index.html")
 
-@app.route('/availabledoctors', methods = ["GET", "POST"])
+@app.route("/availabledoctors") #, methods = ["GET", "POST"]
 def availabledoctors():
-    username = request.args.get('user')
     speciality = request.args.get('speciality')
     firstNames = []
     lastNames = []
 
     if len(speciality) != 0:
         try:
-            cursor = g.conn.execute('SELECT D.firstName, D.lastName FROM Doctors D WHERE D.speciality = (%s)')
+            cursor = g.conn.execute('SELECT D.firstName, D.lastName FROM Doctors D WHERE D.speciality = (%s)',speciality)
             for result in cursor:
                 firstNames.append(result['firstName'])
                 lastNames.append(result['lastName'])
@@ -54,9 +53,11 @@ def availabledoctors():
 
             context_firstNames = dict(data_one = firstNames)
             context_lastNames = dict(data_two = lastNames)
+            print(context_firstNames)
+            print(context_lastNames)
         except Exception:
             error = 'Search failed'
-    return render_template("availabledoctors", error = error, user = username, **context_firstNames, **context_lastNames)
+    return render_template("availabledoctors", **context_firstNames, **context_lastNames)
 
 @app.route("/confirmschedule")
 def confirmschedule():
@@ -72,11 +73,11 @@ def dashboard():
 
 @app.route('/schedule', methods = ["GET", "POST"])
 def schedule():
-    username = request.args.get('user')
+    #username = request.args.get('user')
     if request.method == "POST":
         speciality = request.form['speciality']
 
-        return redirect(url_for('availabledoctors', speciality = speciality))
+        return redirect(url_for("availabledoctors", speciality = speciality))
 
     return render_template("schedule.html")
 

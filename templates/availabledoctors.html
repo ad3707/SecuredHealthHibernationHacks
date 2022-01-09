@@ -118,8 +118,27 @@
       }
 
 
+      #box {
+        background-color: #fad195;
+        height: 500px;
+        width: 300px;
+        float:left;
+        margin-left: 50px;
+        margin-top: 50px;
+        margin-bottom: 10px;
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 5px 10px #FFE1E1;
+
       }
+
+      #container  {
+        width: 1500px;
+        margin:auto;
+      }
+
     </style>
+
   </head>
   <body>
 
@@ -135,39 +154,29 @@
       </div>
     </div>
 
+    <!-- <?php $speciality = $_GET['speciality']; ?> -->
 
-<br>
+     <div id = "container">
+      <div>
+        {% for i in range(data_one|length) %}
+        <span id = "box">
+          <h3> Dr. {{ data_one[i] }} </h3>
+          <h3> {{ data_two[i] }} </h3>
+        </span>
+        {% endfor %}
+       </div>
+      </div>
 
-<table>
-<tr>
-  <th> </th>
-  <th>Doctor Name</th>
-  <th>Office</th>
-</tr>
-<tr>
-  <form action="/confirmation.html">
-  <td> <input type="radio" id="html" name="johndoe" value="HTML"> </td>
-  <td> <label for="html">Dr. John Doe</label></td>
-  <td>100 Apple Ave, Orange City, NY 12345</td><br></br>
-</tr>
-<tr>
-  <td> <input type="radio" id="html" name="janesmith" value="HTML"> </td>
-  <td> <label for="html">Dr. Jane Smith</label></td>
-  <td>250 Pear Dr, Yellow City, NY 12582</td><br></br>
-</tr>
-</table>
-  </form>
 
-<div class="item">
-          <p>Date</p>
-          <input type="date" name="date" required/>
-        </div>
-      </form>
-    </div>
-    <a href='/confirmschedule'><button>Schedule Now</button></a>
-      </center>
-  </body>
-</html>
+    </body>
+
+    <script>
+    speciality = url.searchParams.get("speciality");
+    </script>
+
+    </html>
+
+
 
 
 

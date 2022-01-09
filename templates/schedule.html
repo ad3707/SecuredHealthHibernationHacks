@@ -139,7 +139,8 @@
 <br>
 
     <div class="testbox">
-      <form action="/">
+      <?php $speciality = $_GET['speciality']; ?>
+      <form action="{{url_for("schedule")}}" method = "post">
         <br>
         <h1>Schedule An Appointment </h1>
         <h4> Medical Specialty </h4>
@@ -174,9 +175,9 @@
           <p>Date</p>
           <input type="date" name="date" required/>
         </div>
+        <button type = "submit" id = "submit" class = "button" > Submit </button>
       </form>
     </div>
-    <a href='/availabledoctors'><button>Find Doctors</button></a>
       </center>
   </body>
 </html>
