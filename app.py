@@ -76,9 +76,9 @@ def schedule():
     if request.method == "POST":
         speciality = request.form['speciality']
 
-        return redirect(url_for('availabledoctors',user = username, speciality = speciality))
+        return redirect(url_for('availabledoctors', speciality = speciality))
 
-    return render_template("schedule.html", user = username)
+    return render_template("schedule.html")
 
 @app.route("/createaccount",methods = ["GET", "POST"])
 def gfg():
