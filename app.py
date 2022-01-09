@@ -34,6 +34,7 @@ def homeBack():
 @app.route('/availabledoctors', methods = ["GET", "POST"])
 def schedule():
     username = request.args.get('user')
+<<<<<<< HEAD
     speciality = request.args.get('speciality')
     firstNames = []
     lastNames = []
@@ -52,18 +53,26 @@ def schedule():
         error = 'Search failed'
     return render_template("availabledoctors", error = error, user = username, **context_firstNames, **context_lastNames)
         
+=======
+    if request.method == "POST":
+        speciality = request.form['speciality']
+        return redirect(url_for('availabledoctors',user = username,speciality = speciality))
+    return render_template("schedule.html")
+
+>>>>>>> ed9a34afdf4019567b064ca4b5b47161bb9d54b4
 @app.route("/confirmschedule")
 def confirmschedule():
-        return render_template("confirmschedule.html")
+    return render_template("confirmschedule.html")
 
 @app.route("/confirmation")
 def confirmation():
-        return render_template("confirmation.html")
+    return render_template("confirmation.html")
         
 @app.route("/dashboard")
 def confirmation():
-        return render_template("dashboard.html")
+    return render_template("dashboard.html")
 
+<<<<<<< HEAD
 @app.route('/schedule', methods = ["GET", "POST"])
 def schedule():
     username = request.args.get('user')
@@ -73,6 +82,11 @@ def schedule():
         return redirect(url_for('availabledoctors',user = username, speciality = speciality))
    
     return render_template("schedule.html", user = username)
+=======
+@app.route("/availabledoctors")
+def availabledoctors():
+    return render_template("availabledoctors.html")
+>>>>>>> ed9a34afdf4019567b064ca4b5b47161bb9d54b4
 
 @app.route("/createaccount",methods = ["GET", "POST"])
 def gfg():
@@ -99,7 +113,7 @@ def gfg():
 		Weight = request.form.get("weight")
 		zip = request.form.get("zipcode")
 		state = request.form.get("state")
-  
+        
         try:
             g.conn.execute('INSERT INTO Users(username,password,Firstname,Lastname,  DOB,PhoneNumber,AltPhone,Email,Age,Gender,EmergFirstName, EmergLastName, Relationship,EmergNumber,PharmName,PharmNum,DoctorName,DoctorNum,Height, Weight, streetAddress, zip, state, city) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s,%s,%s,%s,%s,%s,%s,%s,%d,%d,%s,%d,%s,%s)',username,password,Firstname,Lastname,  DOB,PhoneNumber,AltPhone,Email,Age,Gender,EmergFirstName, EmergLastName, Relationship,EmergNumber,PharmName,PharmNum,DoctorName,DoctorNum,Height, Weight, streetAddress, zip, state, city)
             
