@@ -38,7 +38,7 @@ def homeBack():
     return render_template("index.html")
 
 @app.route('/availabledoctors', methods = ["GET", "POST"])
-def schedule():
+def availabledoctors():
     username = request.args.get('user')
     speciality = request.args.get('speciality')
     firstNames = []
@@ -58,11 +58,6 @@ def schedule():
             error = 'Search failed'
     return render_template("availabledoctors", error = error, user = username, **context_firstNames, **context_lastNames)
 
-    if request.method == "POST":
-        speciality = request.form['speciality']
-        return redirect(url_for('availabledoctors',user = username,speciality = speciality))
-    return render_template("schedule.html")
-
 @app.route("/confirmschedule")
 def confirmschedule():
     return render_template("confirmschedule.html")
@@ -72,7 +67,7 @@ def confirmation():
     return render_template("confirmation.html")
 
 @app.route("/dashboard")
-def confirmation():
+def dashboard():
     return render_template("dashboard.html")
 
 @app.route('/schedule', methods = ["GET", "POST"])
@@ -84,11 +79,6 @@ def schedule():
         return redirect(url_for('availabledoctors',user = username, speciality = speciality))
 
     return render_template("schedule.html", user = username)
-
-@app.route("/availabledoctors")
-def availabledoctors():
-    return render_template("availabledoctors.html")
-
 
 @app.route("/createaccount",methods = ["GET", "POST"])
 def gfg():
