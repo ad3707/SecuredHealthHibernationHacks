@@ -8,39 +8,50 @@ engine = create_engine(DATABASEURI)
 
 @app.before_request
 def before_request():
-  try:
-    g.conn = engine.connect()
-  except:
-    print("Cannot connect to database")
-    import traceback; traceback.print_exc()
-    g.conn = None
+    try:
+        g.conn = engine.connect()
+    except:
+        print("Cannot connect to database")
+        import traceback; traceback.print_exc()
+        g.conn = None
 
 @app.teardown_request
 def teardown_request(exception):
-  
-  try:
-    g.conn.close()
-  except Exception as e:
-    pass
+    try:
+        g.conn.close()
+    except Exception as e:
+        pass
     
-
 #static route
 @app.route("/")
 def home():
-	return render_template("index.html")
+    return render_template("index.html")
  
 @app.route("/home")
 def homeBack():
     return render_template("index.html")
 
-@app.route('/schedule', methods = ["GET", "POST"])
+@app.route('/availabledoctors', methods = ["GET", "POST"])
 def schedule():
-        username = request.args.get('user')
-        if request.method == "POST":
-            speciality = request.form['speciality']
-            return redirect(url_for('availabledoctors',user = username,speciality = speciality))
-        return render_template("schedule.html")
-
+    username = request.args.get('user')
+    speciality = request.args.get('speciality')
+    firstNames = []
+    lastNames = []
+    
+    if len(speciality) != 0:
+        try:
+            cursor = g.conn.execute('SELECT D.firstName, D.lastName FROM Doctors D WHERE D.speciality = (%s)')
+    for result in cursor:
+        firstNames.append(result['firstName'])
+        lastNames.append(result['lastName'])
+    cursor.close()
+    
+    context_firstNames = dict(data_one = firstNames)
+    context_lastNames = dict(data_two = lastNames)
+    except Exception:
+        error = 'Search failed'
+    return render_template("availabledoctors", error = error, user = username, **context_firstNames, **context_lastNames)
+        
 @app.route("/confirmschedule")
 def confirmschedule():
         return render_template("confirmschedule.html")
@@ -53,51 +64,57 @@ def confirmation():
 def confirmation():
         return render_template("dashboard.html")
 
-@app.route("/availabledoctors")
-def availabledoctors():
-        return render_template("availabledoctors.html")
+@app.route('/schedule', methods = ["GET", "POST"])
+def schedule():
+    username = request.args.get('user')
+    if request.method == "POST":
+        speciality = request.form['speciality']
+    
+        return redirect(url_for('availabledoctors',user = username, speciality = speciality))
+   
+    return render_template("schedule.html", user = username)
 
 @app.route("/createaccount",methods = ["GET", "POST"])
 def gfg():
 	if request.method == "POST":
-		first_name = request.form.get("fname")
-		last_name = request.form.get("lname")
-		date = request.form.get("bday")
-		mainNum = request.form.get("mainPhone")
-		altNum = request.form.get("altPhone")
-		email = request.form.get("email")
-		age = request.form.get("age")
-		gender = request.form.get("gender")
-		emergfirst = request.form.get("emergFname")
-		emerglast = request.form.get("emergLname")
-		relationship = request.form.get("relation")
-		emergNumber = request.form.get("emergNumber")
-		pharmName = request.form.get("pharmName")
-		pharmNum = request.form.get("pharmNum")
-		primaryName = request.form.get("primaryName")
-		primaryNum = request.form.get("primaryNum")
-		weight = request.form.get("weight")
-		height = request.form.get("height")
+        username = request.form.get("username")
+        password = request.form.get("password")
+		Firstname = request.form.get("fname")
+		Lastname = request.form.get("lname")
+		DOB = request.form.get("bday")
+		PhoneNumber = request.form.get("mainPhone")
+		AltPhone = request.form.get("altPhone")
+		Email = request.form.get("email")
+		Age = request.form.get("age")
+		Gender = request.form.get("gender")
+		EmergFirstName = request.form.get("emergFname")
+		EmergLastName = request.form.get("emergLname")
+		Relationship = request.form.get("relation")
+		EmergNumber = request.form.get("emergNumber")
+		PharmName = request.form.get("pharmName")
+		PharmNum = request.form.get("pharmNum")
+		DoctorName = request.form.get("primaryName")
+		DoctorNum = request.form.get("primaryNum")
+        Height = request.form.get("height")
+		Weight = request.form.get("weight")
 		zip = request.form.get("zipcode")
 		state = request.form.get("state")
   
         try:
-            g.conn.execute('INSERT INTO Users(name, breed, birthday, sex, profile_picture, bio, username, size, build) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)', name, breed, birthday, sex, profile_picture, bio, username, size, build)
+            g.conn.execute('INSERT INTO Users(username,password,Firstname,Lastname,  DOB,PhoneNumber,AltPhone,Email,Age,Gender,EmergFirstName, EmergLastName, Relationship,EmergNumber,PharmName,PharmNum,DoctorName,DoctorNum,Height, Weight, streetAddress, zip, state, city) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s,%s,%s,%s,%s,%s,%s,%s,%d,%d,%s,%d,%s,%s)',username,password,Firstname,Lastname,  DOB,PhoneNumber,AltPhone,Email,Age,Gender,EmergFirstName, EmergLastName, Relationship,EmergNumber,PharmName,PharmNum,DoctorName,DoctorNum,Height, Weight, streetAddress, zip, state, city)
             
         except Exception:
             error = 'Invalid entry'
             
         if error is None:
             return redirect(url_for('dashboard',user = username))
-
-#		return "<h1>Patient Information</h1> <br> <h5>Full Name:</h5> " +  first_name + " " + last_name  + "<br><h5>Gender: </h5>" + gender + "<br> <h5>Age:</h5> " + age + "<br> <h5>Weight: </h5>" + weight + "<br> <h5>height</h5>" + height + "<br> <h5>Primary Contact Number:</h5> " + mainNum + "<br> <h5>Alternative Phone: </h5>" + altNum + "<br><h4>Emergency Contact Info:</h4> <br> <h5>Name</h5> <br>" + emergfirst + " " + emerglast + "<br><h5>Number:</h5>" + emergNumber
 	
     return render_template("createaccount.html")
 
 @app.route("/myaccount", methods = ["GET", "POST"])
 def myaccount():
-	if request.method == "POST":
-		username = request.form['username']
+    if request.method == "POST":
+        username = request.form['username']
 		password = request.form['password']
         login = []
         try:
