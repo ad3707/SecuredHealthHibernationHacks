@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bank Customer Feedback Form</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <style>
+      html, body {
+      min-height: 100%;
+      }
+      body, div, form, input, select {
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 14px;
+      color: #666;
+      line-height: 22px;
+      }
+      h1, h4 {
+      margin: 15px 0 4px;
+      font-weight: 400;
+      }
+
+      .testbox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: inherit;
+      padding: 3px;
+      }
+
+      form {
+      width: 100%;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 2px 5px #ccc;
+      }
+
+      input {
+      width: calc(100% - 10px);
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      vertical-align: middle;
+      }
+
+      input:hover, textarea:hover, select:hover {
+      outline: none;
+      border: 1px solid #095484;
+      background: #e6eef7;
+      }
+
+
+      select {
+      padding: 7px 0;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+      background: transparent;
+      }
+      select, table {
+      width: 100%;
+      }
+      option {
+      background: #fff;
+      }
+
+      [type="date"]::-webkit-calendar-picker-indicator {
+      right: 0;
+      z-index: 2;
+      opacity: 0;
+      }
+
+      .question-answer label {
+      display: block;
+      padding: 0 20px 10px 0;
+      }
+      .question-answer input {
+      width: auto;
+      margin-top: -2px;
+      }
+      th, td {
+      width: 18%;
+      padding: 15px 0;
+      border-bottom: 1px solid #ccc;
+      text-align: center;
+      vertical-align: unset;
+      line-height: 18px;
+      font-weight: 400;
+      word-break: break-all;
+      }
+
+      textarea {
+      width: calc(100% - 6px);
+      }
+      .btn-block {
+      margin-top: 20px;
+      text-align: center;
+      }
+      button {
+      width: 150px;
+      padding: 10px;
+      border: none;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      background-color: #095484;
+      font-size: 16px;
+      color: #fff;
+      cursor: pointer;
+      }
+      button:hover {
+      background-color: #0666a3;
+      }
+
+
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="w3-top">
+      <div class="w3-white w3-padding" style="letter-spacing:2px;">
+        <a href="/home" class="w3-button">Secured Health</a>
+        <div class="w3-right w3-hide-small">
+          <a href="/home" class="w3-bar-item w3-button">Home</a>
+          <a href="/myaccount" class="w3-bar-item w3-button">My Account </a>
+          <a href="/createaccount" class="w3-bar-item w3-button">Sign Up </a>
+          <a href="/schedule" class="w3-bar-item w3-button">Schedule</a>
+        </div>
+      </div>
+    </div>
+
+
+<br>
+
+    <div class="testbox">
+      <form action="/">
+        <br>
+        <h1>Schedule An Appointment </h1>
+        <h4> Medical Specialty </h4>
+        <select>
+          <option value="select an option">Select an option</option>
+    <option value="cardiology">Cardiology</option>
+    <option value="dermatology">Dermatology</option>
+    <option value="gastroenterology">Gastroenterology</option>
+    <option value="gynecology">Gynecology</option>
+    <option value="internal medicine">Internal Medicine</option>
+    <option value="orthopedics">Orthopedics</option>
+    <option value="pediatrics">Pediatrics</option>
+    <option value="pulmonology">Pulmonology</option>
+    <option value="radiology">Radiology</option>
+    <option value="urology">Urology</option>
+        </select>
+
+<label for="mileradius">Within a radius of (mi):</label>
+  <select id="mileradius" name="mileradius">
+    <option value="5">5</option>
+    <option value="5">10</option>
+    <option value="5">15</option>
+    <option value="5">20</option>
+    <option value="5">25</option>
+    <option value="5">30</option>
+    <option value="5">35</option>
+    <option value="5">40</option>
+  </select>
+
+
+<div class="item">
+          <p>Date</p>
+          <input type="date" name="date" required/>
+        </div>
+      </form>
+    </div>
+    <a href='/availabledoctors'><button>Find Doctors</button></a>
+      </center>
+  </body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+
+body, div, form, input, select, p {
+padding: 0;
+margin: 0;
+outline: none;
+font-family: Roboto, Arial, sans-serif;
+font-size: 14px;
+color: 	#000000;
+line-height: 22px;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #3377ff;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+}
+
+
+</style>
+  <title> Secure Health My Account </title>
+  <body>
+
+      <div class="w3-white w3-padding" style="letter-spacing:2px;">
+        <a href="/home" class="w3-bar-item w3-button">Secured Health</a>
+        <div class="w3-right w3-hide-small">
+          <a href="/home" class="w3-bar-item w3-button">Home</a>
+          <a href="/myaccount" class="w3-bar-item w3-button">My Account </a>
+          <a href="/createaccount" class="w3-bar-item w3-button">Sign Up </a>
+          <a href="/schedule" class="w3-bar-item w3-button">Schedule</a>
+        </div>
+      </div>
+
+
+    <h1> <center> My Secure Health Account </center> </h1>
+    <h4> <center> Login to view your account info </center> </h4>
+
+    <form action="{{ url_for("myaccount")}}" method="post">
+
+    <input type="text" name="username" placeholder="username" required/>
+    <input type="text" name="password" placeholder="password" required/>
+
+    <div class="btn-block">
+  <button type="submit">Login</button>
+    </div>
+    <label>
+     <input type="checkbox" checked="checked" name="remember"> Remember me
+   </label>
+
+
+  </form>
+ </body>
+</html>
