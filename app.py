@@ -97,10 +97,23 @@ def gfg():
 @app.route("/myaccount", methods = ["GET", "POST"])
 def myaccount():
 	if request.method == "POST":
-		username = request.form.get("username")
-		password = request.form.get("password")
-		return redirect(url_for('dashboard',user = username))
-	return render_template("myaccount.html")
+		username = request.form['username']
+		password = request.form['password']
+        login = []
+        try:
+            cursor = g.conn.execute('SELECT username FROM Users WHERE username = (%s) AND password = (%s)', username, password)
+            for result in cursor:
+                login.append(result['username'])
+            cursor.close()
+        
+        except Exception:
+            error = 'Invalid search query'
+        if len(login) == 1:
+            return redirect(url_for('dashboard',user = username))
+        
+        error = 'Invalid username or password'
+        
+    return render_template("myaccount.html", error = error)
 
 #start the server
 if __name__ == "__main__":
