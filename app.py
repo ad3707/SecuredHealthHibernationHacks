@@ -4,9 +4,13 @@ from flask import Flask,request, render_template
 app = Flask(__name__)
 
 #static route
-@app.route("/home")
+@app.route("/")
 def home():
 	return render_template("index.html")
+ 
+@app.route("/home")
+def homeBack():
+    return render_template("index.html")
 
 @app.route("/schedule")
 def schedule():
@@ -26,7 +30,7 @@ def availabledoctors():
 
 
 
-@app.route('/createaccount',methods = ["GET", "POST"])
+@app.route("/createaccount",methods = ["GET", "POST"])
 def gfg():
 	if request.method == "POST":
 		first_name = request.form.get("fname")
@@ -64,3 +68,4 @@ def myaccount():
 #start the server
 if __name__ == "__main__":
 	app.run()
+
